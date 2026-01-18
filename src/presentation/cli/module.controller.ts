@@ -1,7 +1,7 @@
 import { CreateModuleCommand } from '../../application/commands/create-module.command';
 import { CreateModuleUseCase } from '../../application/use-cases/create-module.use-case';
 import { InteractivePromptService } from './interactive-prompt.service';
-import chalk from 'chalk';
+import * as chalk from 'chalk';
 import ora from 'ora';
 
 export class ModuleController {

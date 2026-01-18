@@ -13,7 +13,8 @@ export class HandlebarsTemplateService extends TemplateService {
     const isProduction = __filename.endsWith('.js');
     if (isProduction) {
       // In production, templates are in dist/templates
-      this.templatesBasePath = path.join(__dirname, '../templates');
+      // Service is in dist/infrastructure/services/, so we need to go up two levels
+      this.templatesBasePath = path.join(__dirname, '../../templates');
     } else {
       // In development, templates are in src/templates
       this.templatesBasePath = path.join(__dirname, '../../templates');

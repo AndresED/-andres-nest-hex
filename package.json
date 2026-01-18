@@ -1,6 +1,6 @@
 {
   "name": "@andres30xed/nest-hex",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "CLI tool that generates NestJS scaffolding using Hexagonal Architecture and CQRS",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
