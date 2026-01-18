@@ -1,0 +1,40 @@
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { {{resourceNamePascal}}Entity } from '../../domain/entities/{{resourceName}}.entity';
+import { {{resourceNamePascal}}Repository } from '../../domain/repositories/{{resourceName}}.repository';
+
+@Injectable()
+export class TypeOrm{{resourceNamePascal}}Repository extends {{resourceNamePascal}}Repository {
+  constructor(
+    @InjectRepository({{resourceNamePascal}}Entity)
+    private readonly repository: Repository<{{resourceNamePascal}}Entity>,
+  ) {
+    super();
+  }
+
+  async create(entity: {{resourceNamePascal}}Entity): Promise<{{resourceNamePascal}}Entity> {
+    return await this.repository.save(entity);
+  }
+
+  async findById(id: string): Promise<{{resourceNamePascal}}Entity | null> {
+    return await this.repository.findOne({ where: { id } });
+  }
+
+  async findAll(): Promise<{{resourceNamePascal}}Entity[]> {
+    return await this.repository.find();
+  }
+
+  async update(id: string, entity: Partial<{{resourceNamePascal}}Entity>): Promise<{{resourceNamePascal}}Entity> {
+    await this.repository.update(id, entity);
+    const updated = await this.findById(id);
+    if (!updated) {
+      throw new Error('Entity not found');
+    }
+    return updated;
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.repository.delete(id);
+  }
+}

@@ -1,0 +1,15 @@
+import { Delete{{resourceNamePascal}}Command } from '../commands/delete-{{resourceName}}.command';
+import { {{resourceNamePascal}}Repository } from '../../domain/repositories/{{resourceName}}.repository';
+
+export class Delete{{resourceNamePascal}}UseCase {
+  constructor(private readonly repository: {{resourceNamePascal}}Repository) {}
+
+  async execute(command: Delete{{resourceNamePascal}}Command): Promise<void> {
+    const existing = await this.repository.findById(command.id);
+    if (!existing) {
+      throw new Error('{{resourceNamePascal}} not found');
+    }
+
+    await this.repository.delete(command.id);
+  }
+}

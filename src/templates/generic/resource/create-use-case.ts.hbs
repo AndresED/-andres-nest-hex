@@ -1,0 +1,28 @@
+import { Create{{resourceNamePascal}}Command } from '../commands/create-{{resourceName}}.command';
+import { {{resourceNamePascal}}Dto } from '../dtos/{{resourceName}}.dto';
+import { {{resourceNamePascal}}Entity } from '../../domain/entities/{{resourceName}}.entity';
+import { {{resourceNamePascal}}Repository } from '../../domain/repositories/{{resourceName}}.repository';
+
+export class Create{{resourceNamePascal}}UseCase {
+  constructor(private readonly repository: {{resourceNamePascal}}Repository) {}
+
+  async execute(command: Create{{resourceNamePascal}}Command): Promise<{{resourceNamePascal}}Dto> {
+    const entity = new {{resourceNamePascal}}Entity();
+{{#each fields}}
+    {{#if required}}
+    entity.{{name}} = command.{{name}};
+    {{/if}}
+{{/each}}
+
+    const created = await this.repository.create(entity);
+
+    return {
+      id: created.id,
+{{#each fields}}
+      {{name}}: created.{{name}},
+{{/each}}
+      createdAt: created.createdAt,
+      updatedAt: created.updatedAt,
+    };
+  }
+}

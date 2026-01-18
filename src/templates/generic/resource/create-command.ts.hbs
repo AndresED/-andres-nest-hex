@@ -1,0 +1,13 @@
+export class Create{{resourceNamePascal}}Command {
+{{#if fields}}
+  constructor(
+{{#each fields}}
+    {{#if required}}
+    public readonly {{name}}: {{type}}{{#unless @last}},{{/unless}}
+    {{/if}}
+{{/each}}
+  ) {}
+{{else}}
+  constructor() {}
+{{/if}}
+}

@@ -1,0 +1,51 @@
+import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Create{{resourceNamePascal}}UseCase } from '../application/use-cases/create-{{resourceName}}.use-case';
+import { Update{{resourceNamePascal}}UseCase } from '../application/use-cases/update-{{resourceName}}.use-case';
+import { Delete{{resourceNamePascal}}UseCase } from '../application/use-cases/delete-{{resourceName}}.use-case';
+import { Get{{resourceNamePascal}}UseCase } from '../application/use-cases/get-{{resourceName}}.use-case';
+import { List{{resourceNamePascal}}sUseCase } from '../application/use-cases/list-{{resourceName}}s.use-case';
+import { Create{{resourceNamePascal}}Command } from '../application/commands/create-{{resourceName}}.command';
+import { Update{{resourceNamePascal}}Command } from '../application/commands/update-{{resourceName}}.command';
+import { Delete{{resourceNamePascal}}Command } from '../application/commands/delete-{{resourceName}}.command';
+import { Get{{resourceNamePascal}}Query } from '../application/queries/get-{{resourceName}}.query';
+import { List{{resourceNamePascal}}sQuery } from '../application/queries/list-{{resourceName}}s.query';
+import { {{resourceNamePascal}}Dto } from '../application/dtos/{{resourceName}}.dto';
+
+@Controller('{{resourceName}}s')
+export class {{resourceNamePascal}}Controller {
+  constructor(
+    private readonly createUseCase: Create{{resourceNamePascal}}UseCase,
+    private readonly updateUseCase: Update{{resourceNamePascal}}UseCase,
+    private readonly deleteUseCase: Delete{{resourceNamePascal}}UseCase,
+    private readonly getUseCase: Get{{resourceNamePascal}}UseCase,
+    private readonly listUseCase: List{{resourceNamePascal}}sUseCase,
+  ) {}
+
+  @Post()
+  async create(@Body() body: Create{{resourceNamePascal}}Command): Promise<{{resourceNamePascal}}Dto> {
+    return await this.createUseCase.execute(body);
+  }
+
+  @Get(':id')
+  async getById(@Param('id') id: string): Promise<{{resourceNamePascal}}Dto | null> {
+    return await this.getUseCase.execute(new Get{{resourceNamePascal}}Query(id));
+  }
+
+  @Get()
+  async list(@Body() query?: List{{resourceNamePascal}}sQuery): Promise<{{resourceNamePascal}}Dto[]> {
+    return await this.listUseCase.execute(query || new List{{resourceNamePascal}}sQuery());
+  }
+
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() body: Omit<Update{{resourceNamePascal}}Command, 'id'>): Promise<{{resourceNamePascal}}Dto> {
+    return await this.updateUseCase.execute(new Update{{resourceNamePascal}}Command(
+      id{{#each fields}},
+      body.{{name}}{{/each}}
+    ));
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string): Promise<void> {
+    return await this.deleteUseCase.execute(new Delete{{resourceNamePascal}}Command(id));
+  }
+}

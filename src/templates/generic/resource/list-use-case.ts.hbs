@@ -1,0 +1,20 @@
+import { List{{resourceNamePascal}}sQuery } from '../queries/list-{{resourceName}}s.query';
+import { {{resourceNamePascal}}Dto } from '../dtos/{{resourceName}}.dto';
+import { {{resourceNamePascal}}Repository } from '../../domain/repositories/{{resourceName}}.repository';
+
+export class List{{resourceNamePascal}}sUseCase {
+  constructor(private readonly repository: {{resourceNamePascal}}Repository) {}
+
+  async execute(query: List{{resourceNamePascal}}sQuery): Promise<{{resourceNamePascal}}Dto[]> {
+    const entities = await this.repository.findAll();
+    // TODO: Implement pagination
+    return entities.map(entity => ({
+      id: entity.id,
+{{#each fields}}
+      {{name}}: entity.{{name}},
+{{/each}}
+      createdAt: entity.createdAt,
+      updatedAt: entity.updatedAt,
+    }));
+  }
+}

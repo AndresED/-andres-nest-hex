@@ -1,0 +1,8 @@
+export interface {{resourceNamePascal}}Dto {
+  id: string;
+{{#each fields}}
+  {{name}}: {{type}};
+{{/each}}
+  createdAt: Date;
+  updatedAt: Date;
+}

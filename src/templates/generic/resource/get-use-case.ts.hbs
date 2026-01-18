@@ -1,0 +1,23 @@
+import { Get{{resourceNamePascal}}Query } from '../queries/get-{{resourceName}}.query';
+import { {{resourceNamePascal}}Dto } from '../dtos/{{resourceName}}.dto';
+import { {{resourceNamePascal}}Repository } from '../../domain/repositories/{{resourceName}}.repository';
+
+export class Get{{resourceNamePascal}}UseCase {
+  constructor(private readonly repository: {{resourceNamePascal}}Repository) {}
+
+  async execute(query: Get{{resourceNamePascal}}Query): Promise<{{resourceNamePascal}}Dto | null> {
+    const entity = await this.repository.findById(query.id);
+    if (!entity) {
+      return null;
+    }
+
+    return {
+      id: entity.id,
+{{#each fields}}
+      {{name}}: entity.{{name}},
+{{/each}}
+      createdAt: entity.createdAt,
+      updatedAt: entity.updatedAt,
+    };
+  }
+}

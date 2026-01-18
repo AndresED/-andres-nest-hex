@@ -1,0 +1,21 @@
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+
+@Entity('{{resourceName}}s')
+export class {{resourceNamePascal}}Entity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+{{#each fields}}
+  @Column({{#if unique}}{
+    unique: true{{#if required}},
+    nullable: false{{/if}}
+  }{{else}}{{#if required}}{ nullable: false }{{/if}}{{/if}})
+  {{name}}: {{type}};
+{{/each}}
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
+  updatedAt: Date;
+}

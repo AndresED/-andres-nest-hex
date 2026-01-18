@@ -1,0 +1,9 @@
+import { {{resourceNamePascal}}Entity } from '../entities/{{resourceName}}.entity';
+
+export abstract class {{resourceNamePascal}}Repository {
+  abstract create(entity: {{resourceNamePascal}}Entity): Promise<{{resourceNamePascal}}Entity>;
+  abstract findById(id: string): Promise<{{resourceNamePascal}}Entity | null>;
+  abstract findAll(): Promise<{{resourceNamePascal}}Entity[]>;
+  abstract update(id: string, entity: Partial<{{resourceNamePascal}}Entity>): Promise<{{resourceNamePascal}}Entity>;
+  abstract delete(id: string): Promise<void>;
+}

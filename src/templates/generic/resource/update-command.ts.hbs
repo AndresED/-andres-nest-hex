@@ -1,0 +1,8 @@
+export class Update{{resourceNamePascal}}Command {
+  constructor(
+    public readonly id: string,
+{{#each fields}}
+    public readonly {{name}}?: {{type}},
+{{/each}}
+  ) {}
+}

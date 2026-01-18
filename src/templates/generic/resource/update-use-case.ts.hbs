@@ -1,0 +1,32 @@
+import { Update{{resourceNamePascal}}Command } from '../commands/update-{{resourceName}}.command';
+import { {{resourceNamePascal}}Dto } from '../dtos/{{resourceName}}.dto';
+import { {{resourceNamePascal}}Repository } from '../../domain/repositories/{{resourceName}}.repository';
+
+export class Update{{resourceNamePascal}}UseCase {
+  constructor(private readonly repository: {{resourceNamePascal}}Repository) {}
+
+  async execute(command: Update{{resourceNamePascal}}Command): Promise<{{resourceNamePascal}}Dto> {
+    const existing = await this.repository.findById(command.id);
+    if (!existing) {
+      throw new Error('{{resourceNamePascal}} not found');
+    }
+
+    const updateData: Partial<typeof existing> = {};
+{{#each fields}}
+    if (command.{{name}} !== undefined) {
+      updateData.{{name}} = command.{{name}};
+    }
+{{/each}}
+
+    const updated = await this.repository.update(command.id, updateData);
+
+    return {
+      id: updated.id,
+{{#each fields}}
+      {{name}}: updated.{{name}},
+{{/each}}
+      createdAt: updated.createdAt,
+      updatedAt: updated.updatedAt,
+    };
+  }
+}
