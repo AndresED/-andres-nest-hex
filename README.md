@@ -4,14 +4,14 @@ CLI tool that generates NestJS scaffolding using Hexagonal Architecture and CQRS
 
 ## 📚 Documentation
 
-- **[English Documentation]([README.en.md](https://github.com/AndresED/-andres-nest-hex/blob/master/README.en.md))** - Complete guide in English
-- **[Documentación en Español]([README.es.md](https://github.com/AndresED/-andres-nest-hex/blob/master/README.es.md))** - Guía completa en Español
+- **[English Documentation](https://github.com/AndresED/-andres-nest-hex/blob/master/README.en.md)** - Complete guide in English
+- **[Documentación en Español](https://github.com/AndresED/-andres-nest-hex/blob/master/README.es.md)** - Guía completa en Español
 
 ## Quick Start
 
 ```bash
 # Install globally
-npm install -g nest-hex
+npm install -g @andres30xed/nest-hex
 
 # Create a new project
 nest-hex new my-project --orm typeorm --database postgres
