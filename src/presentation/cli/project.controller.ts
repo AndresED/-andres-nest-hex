@@ -1,7 +1,7 @@
 import { CreateProjectCommand } from '../../application/commands/create-project.command';
 import { CreateProjectUseCase } from '../../application/use-cases/create-project.use-case';
 import { InteractivePromptService } from './interactive-prompt.service';
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 import ora from 'ora';
 
 export class ProjectController {
