@@ -4,8 +4,8 @@ CLI tool that generates NestJS scaffolding using Hexagonal Architecture and CQRS
 
 ## 📚 Documentation
 
-- **[English Documentation](README.en.md)** - Complete guide in English
-- **[Documentación en Español](README.es.md)** - Guía completa en Español
+- **[English Documentation]([README.en.md](https://github.com/AndresED/-andres-nest-hex/blob/master/README.en.md))** - Complete guide in English
+- **[Documentación en Español]([README.es.md](https://github.com/AndresED/-andres-nest-hex/blob/master/README.es.md))** - Guía completa en Español
 
 ## Quick Start
 
