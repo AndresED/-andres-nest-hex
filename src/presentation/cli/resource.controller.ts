@@ -2,7 +2,6 @@ import { CreateResourceCommand } from '../../application/commands/create-resourc
 import { CreateResourceUseCase } from '../../application/use-cases/create-resource.use-case';
 import { GetProjectStructureUseCase } from '../../application/use-cases/get-project-structure.use-case';
 import { InteractivePromptService } from './interactive-prompt.service';
-import * as chalk from 'chalk';
 import ora from 'ora';
 
 export class ResourceController {
@@ -53,9 +52,9 @@ export class ResourceController {
 
     try {
       const result = await this.createResourceUseCase.execute(command);
-      spinner.succeed(chalk.green(`Resource ${result.name} created successfully in module ${result.moduleName}`));
+      spinner.succeed(`Resource ${result.name} created successfully in module ${result.moduleName}`);
     } catch (error: any) {
-      spinner.fail(chalk.red(`Failed to create resource: ${error.message}`));
+      spinner.fail(`Failed to create resource: ${error.message}`);
       throw error;
     }
   }

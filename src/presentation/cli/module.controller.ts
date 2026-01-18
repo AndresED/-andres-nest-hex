@@ -1,7 +1,6 @@
 import { CreateModuleCommand } from '../../application/commands/create-module.command';
 import { CreateModuleUseCase } from '../../application/use-cases/create-module.use-case';
 import { InteractivePromptService } from './interactive-prompt.service';
-import * as chalk from 'chalk';
 import ora from 'ora';
 
 export class ModuleController {
@@ -30,9 +29,9 @@ export class ModuleController {
 
     try {
       const result = await this.createModuleUseCase.execute(command);
-      spinner.succeed(chalk.green(`Module ${result.name} created successfully`));
+      spinner.succeed(`Module ${result.name} created successfully`);
     } catch (error: any) {
-      spinner.fail(chalk.red(`Failed to create module: ${error.message}`));
+      spinner.fail(`Failed to create module: ${error.message}`);
       throw error;
     }
   }

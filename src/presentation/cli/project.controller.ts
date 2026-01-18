@@ -1,7 +1,6 @@
 import { CreateProjectCommand } from '../../application/commands/create-project.command';
 import { CreateProjectUseCase } from '../../application/use-cases/create-project.use-case';
 import { InteractivePromptService } from './interactive-prompt.service';
-import * as chalk from 'chalk';
 import ora from 'ora';
 
 export class ProjectController {
@@ -31,9 +30,9 @@ export class ProjectController {
 
     try {
       const result = await this.createProjectUseCase.execute(command);
-      spinner.succeed(chalk.green(`Project ${result.name} created successfully at ${result.path}`));
+      spinner.succeed(`Project ${result.name} created successfully at ${result.path}`);
     } catch (error: any) {
-      spinner.fail(chalk.red(`Failed to create project: ${error.message}`));
+      spinner.fail(`Failed to create project: ${error.message}`);
       throw error;
     }
   }
